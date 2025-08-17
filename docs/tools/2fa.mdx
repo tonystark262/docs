@@ -1,0 +1,26 @@
+---
+title: 2FA Handling
+description: 
+---
+
+If 2FA happens to show up on the page, we provide handing 2FA from email and Authenticator app.
+
+## Email 2FA Example
+
+```python
+from optexity import Optexity
+
+optexity = Optexity(api_key="your-api-key")
+optexity.link_email_2fa(email="your-email@example.com") # link the email 2FA
+optexity.get_2fa_code() # get the 2FA code
+```
+
+## Authenticator 2FA Example
+
+```python
+from optexity import Optexity
+
+optexity = Optexity(api_key="your-api-key")
+optexity.link_authenticator_2fa(secret_key="your-secret-key") # link the authenticator 2FA
+optexity.get_2fa_code() # get the 2FA code
+```
