@@ -10,7 +10,7 @@
   },
   "servers": [
     {
-      "url": "https://api.optexity.com"
+      "url": "https://prod-api.optexity.com"
     }
   ],
   "security": [
