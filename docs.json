@@ -16,16 +16,14 @@
           {
             "group": "Getting started",
             "pages": [
-              "docs/getting_started/index",
-              "docs/getting_started/quickstart",
-              "docs/getting_started/development"
+              "docs/getting_started/introduction",
+              "docs/getting_started/installation"
             ]
           },
           {
-            "group": "Customization",
+            "group": "Recording the workflow",
             "pages": [
-              "docs/essentials/settings",
-              "docs/essentials/navigation"
+              "docs/recording/recording"
             ]
           },
           {
