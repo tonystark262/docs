@@ -27,12 +27,9 @@
             ]
           },
           {
-            "group": "Writing content",
+            "group": "Editing the workflow",
             "pages": [
-              "docs/essentials/markdown",
-              "docs/essentials/code",
-              "docs/essentials/images",
-              "docs/essentials/reusable-snippets"
+              "docs/editing/editing"
             ]
           }
         ]

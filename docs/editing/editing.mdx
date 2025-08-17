@@ -1,0 +1,108 @@
+---
+title: Editing Workflow
+description: Learn how to edit a workflow.
+---
+
+Optexity lets you **edit demonstrations** to make them reusable, parameterized, and flexible.  
+A demonstration is a sequence of **subgoals**, each containing **actions** (like typing, clicking, or selecting).  
+
+---
+
+## Structure of a Demonstration
+
+A demonstration is represented as a JSON object. At a high level, it looks like this:
+
+- **title**: Short description of the goal.  
+- **use_vision**: Whether vision-based selection is enabled.  
+- **subgoal_index**: ID for the subgoal.  
+- **subgoal_actions**: List of actions (e.g., filling text, clicking buttons).  
+- **parameters**: Some actions can be parameterized instead of hardcoded.  
+
+---
+
+## Example
+
+Here’s a simple demonstration for logging into GlossGenius and closing the welcome dialog:
+
+```json
+[
+  {
+    "title": "Enter the email and password and login and close welcome to GlossGenius",
+    "use_vision": false,
+    "subgoal_index": "subgoal0",
+    "subgoal_actions": [
+      {
+        "action": {
+          "text": "test@test.com",
+          "type": "InputTextAction",
+          "command": "page.getByRole('textbox', { name: 'Email' }).fill('test@test.com')"
+        },
+        "action_description": "Fill '{username}' in the email textbox.",
+        "fill_value_parameter_name": "username"
+      },
+      {
+        "action": {
+          "text": "password",
+          "type": "InputTextAction",
+          "command": "page.getByRole('textbox', { name: 'Password' }).fill('password')"
+        },
+        "action_description": "Fill '{password}' in the password textbox.",
+        "fill_value_parameter_name": "password"
+      },
+      {
+        "action": {
+          "type": "ClickElementAction",
+          "command": "page.getByRole('button', { name: 'Log In' }).click()"
+        },
+        "action_description": "Click on the 'Log In' button."
+      },
+      {
+        "action": {
+          "type": "ClickElementAction",
+          "command": "page.getByRole('button', { name: 'Close Welcome to GlossGenius' }).click()"
+        },
+        "action_description": "Click on the 'Close Welcome to GlossGenius' button."
+      }
+    ]
+  }
+]
+```
+
+## Parameters
+
+Notice that the email and password fields use parameters instead of hardcoded values:
+
+- `fill_value_parameter_name`: `username`
+- `fill_value_parameter_name`: `password`
+
+This means you can reuse the same workflow by passing different values at runtime (e.g., logging in with different accounts).
+
+## Optional Fields
+
+The following fields are optional:
+
+- `use_vision`: Whether vision-based selection is enabled.
+- `subgoal_index`: ID for the subgoal.
+- `subgoal_actions`: List of actions (e.g., filling text, clicking buttons).
+- `parameters`: Some actions can be parameterized instead of hardcoded.
+- `is_slider`: Whether the action is a slider.
+- `fill_type`: `fixed` or `dynamic`.
+- `locator_type`: `fixed` or `dynamic`.
+- `action_description`: Description of the action.
+- `fill_value_parameter_name`: Name of the parameter to fill in the action.
+-
+
+## Editing Tips
+
+- Add Parameters: Replace fixed text with placeholders like `{username}`.
+- Change Locators: Update the locator (e.g., `getByRole`, `getByText`) if the UI changes.
+- Reorder Actions: Actions can be dragged/dropped to adjust sequence.
+- Use Vision if Needed: Set `"use_vision": true` for image-based UI elements.
+
+## Summary
+
+- Demonstrations are JSON workflows with subgoals and actions.
+- You can parameterize inputs (like `username`, `password`, etc.) for reusability.
+- Actions can be edited, reordered, or extended with new steps.
+
+This workflow makes it easy to record once, edit later, and reuse everywhere.
