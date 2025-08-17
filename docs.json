@@ -64,13 +64,8 @@
       "anchors": [
         {
           "anchor": "Documentation",
-          "href": "https://optexity.com/docs",
+          "href": "https://docs.optexity.com",
           "icon": "book-open-cover"
-        },
-        {
-          "anchor": "Community",
-          "href": "https://optexity.com/community",
-          "icon": "slack"
         },
         {
           "anchor": "Blog",
@@ -93,7 +88,7 @@
     ],
     "primary": {
       "type": "button",
-      "label": "Dashboard",
+      "label": "Main Website",
       "href": "https://optexity.com"
     }
   },
