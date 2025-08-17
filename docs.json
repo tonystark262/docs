@@ -37,6 +37,13 @@
             "pages": [
               "docs/running/running"
             ]
+          },
+          {
+            "group": "Tools",
+            "pages": [
+              "docs/tools/2fa",
+              "docs/tools/captcha"
+            ]
           }
         ]
       },

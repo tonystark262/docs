@@ -1,0 +1,19 @@
+---
+title: CAPTCHA Handling
+description: If CAPTCHAs happen to show up on the page, we provide two functions to help you handle them: captcha_exists and wait_for_captcha.
+---
+
+## CAPTCHA Handling
+
+If CAPTCHAs happen to show up on the page, we provide two functions to help you handle them: `captcha_exists` and `wait_for_captcha`. You can also use `solve_captcha` to solve the CAPTCHA automatically.
+
+## Example
+
+```python
+from optexity import Optexity
+
+optexity = Optexity(api_key="your-api-key")
+optexity.goto("https://www.google.com/recaptcha/api2/demo")
+optexity.wait_for_captcha() # wait for the CAPTCHA to finish
+optexity.solve_captcha() # solve the CAPTCHA
+```
