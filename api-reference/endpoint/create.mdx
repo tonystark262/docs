@@ -1,4 +1,69 @@
 ---
-title: 'Create Plant'
-openapi: 'POST /plants'
+title: 'Create Goal with Files'
+openapi: 'POST /api/v1/save_demo'
 ---
+
+## Create a New Goal with File Attachments
+
+This endpoint allows you to create a new goal with optional file attachments. The files will be stored in Supabase Storage and their URLs will be saved with the goal.
+
+### Request Headers
+
+| Header | Type | Required | Description |
+|--------|------|----------|-------------|
+| `x-api-key` | string | Yes | Your API key for authentication |
+
+### Request Body
+
+| Field | Type | Required | Description |
+|-------|------|----------|-------------|
+| `url` | string | Yes | The URL associated with the goal |
+| `files` | array<string> | Yes | Array of file URLs or file data to be attached to the goal |
+
+### Example Request
+
+```bash
+curl -X POST /api/v1/save_demo \
+  -H "x-api-key: YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "url": "https://example.com/workflow",
+    "files": [
+      "https://example.com/file1.pdf",
+      "https://example.com/file2.jpg"
+    ]
+  }'
+```
+
+### Example Response
+
+```json
+{
+  "success": true,
+  "goal_id": "goal_123456789",
+  "message": "Goal created successfully with 2 file attachments"
+}
+```
+
+### Error Responses
+
+**400 Bad Request**
+```json
+{
+  "error": "Missing required fields: url, files"
+}
+```
+
+**401 Unauthorized**
+```json
+{
+  "error": "Invalid API key"
+}
+```
+
+**500 Internal Server Error**
+```json
+{
+  "error": "Failed to store files in Supabase Storage"
+}
+```

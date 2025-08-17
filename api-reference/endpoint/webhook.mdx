@@ -1,4 +1,107 @@
 ---
-title: 'New Plant'
-openapi: 'WEBHOOK /plant/webhook'
+title: 'Get Request Status'
+openapi: 'POST /api/v1/inference/call'
 ---
+
+## Get Status of a Specific Request
+
+This endpoint allows you to check the status of a specific inference request using its task ID. You can use this to monitor the progress of running tasks or retrieve results of completed tasks.
+
+### Request Headers
+
+| Header | Type | Required | Description |
+|--------|------|----------|-------------|
+| `x-api-key` | string | Yes | Your API key for authentication |
+
+### Request Body
+
+| Field | Type | Required | Description |
+|-------|------|----------|-------------|
+| `task_id` | string | Yes | The unique identifier of the task to check |
+
+### Example Request
+
+```bash
+curl -X POST /api/v1/inference/call \
+  -H "x-api-key: YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "task_id": "task_123456789"
+  }'
+```
+
+### Example Response
+
+**For a completed task:**
+```json
+{
+  "success": true,
+  "task_id": "task_123456789",
+  "status": "completed",
+  "end_point": "https://api.example.com/process",
+  "goal": "Analyze customer feedback sentiment",
+  "created_at": "2024-01-15T10:30:00Z",
+  "completed_at": "2024-01-15T10:32:15Z",
+  "result": "Positive sentiment detected with 85% confidence",
+  "execution_time": "2.25 seconds"
+}
+```
+
+**For a running task:**
+```json
+{
+  "success": true,
+  "task_id": "task_987654321",
+  "status": "running",
+  "end_point": "https://api.example.com/analyze",
+  "goal": "Process document data",
+  "created_at": "2024-01-15T11:00:00Z",
+  "progress": 75,
+  "estimated_completion": "2024-01-15T11:02:30Z"
+}
+```
+
+**For a failed task:**
+```json
+{
+  "success": true,
+  "task_id": "task_555666777",
+  "status": "failed",
+  "end_point": "https://api.example.com/process",
+  "goal": "Analyze data",
+  "created_at": "2024-01-15T09:00:00Z",
+  "failed_at": "2024-01-15T09:01:30Z",
+  "error": "Invalid input data format",
+  "error_code": "INVALID_INPUT"
+}
+```
+
+### Error Responses
+
+**400 Bad Request**
+```json
+{
+  "error": "Missing required field: task_id"
+}
+```
+
+**401 Unauthorized**
+```json
+{
+  "error": "Invalid API key"
+}
+```
+
+**404 Not Found**
+```json
+{
+  "error": "Task not found with ID: task_123456789"
+}
+```
+
+**500 Internal Server Error**
+```json
+{
+  "error": "Failed to retrieve task status"
+}
+```

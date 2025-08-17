@@ -1,29 +1,31 @@
 ---
 title: "Introduction"
-description: "Example section for showcasing API endpoints"
+description: "Optexity API Reference - Workflow automation and inference endpoints"
 ---
 
-<Note>
-  If you're not looking to build API reference documentation, you can delete
-  this section by removing the api-reference folder.
-</Note>
+## Welcome to Optexity API
 
-## Welcome
-
-There are two ways to build API documentation: [OpenAPI](https://mintlify.com/docs/api-playground/openapi/setup) and [MDX components](https://mintlify.com/docs/api-playground/mdx/configuration). For the starter kit, we are using the following OpenAPI specification.
-
-<Card title="Plant Store Endpoints" icon="leaf" href="https://github.com/mintlify/starter/blob/main/api-reference/openapi.json">
-  View the OpenAPI specification file
-</Card>
+The Optexity API provides endpoints for creating goals with file attachments, starting inference tasks, and managing workflow automation. All endpoints require authentication using an API key.
 
 ## Authentication
 
-All API endpoints are authenticated using Bearer tokens and picked up from the specification file.
+All API endpoints require authentication using the `x-api-key` header. Include your API key in the request headers:
 
-```json
-"security": [
-  {
-    "bearerAuth": []
-  }
-]
+```bash
+x-api-key: YOUR_API_KEY_HERE
 ```
+
+## Base URL
+
+All API endpoints are relative to the base URL of your Optexity instance.
+
+## Endpoints Overview
+
+- **POST /api/v1/save_demo** - Create a new goal with optional file attachments
+- **POST /api/v1/inference/** - Start a new inference task
+- **POST /api/v1/inference/all_calls** - Get all inference requests
+- **POST /api/v1/inference/call** - Get status of a specific request
+
+<Card title="API Endpoints" icon="code" href="#endpoints">
+  View all available endpoints
+</Card>

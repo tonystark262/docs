@@ -1,4 +1,70 @@
 ---
-title: 'Delete Plant'
-openapi: 'DELETE /plants/{id}'
+title: 'Get All Inference Requests'
+openapi: 'POST /api/v1/inference/all_calls'
 ---
+
+## Get All Inference Requests
+
+This endpoint retrieves all inference requests that have been made so far. It provides a comprehensive list of all tasks and their current statuses.
+
+### Request Headers
+
+| Header | Type | Required | Description |
+|--------|------|----------|-------------|
+| `x-api-key` | string | Yes | Your API key for authentication |
+
+### Request Body
+
+No request body is required for this endpoint.
+
+### Example Request
+
+```bash
+curl -X POST /api/v1/inference/all_calls \
+  -H "x-api-key: YOUR_API_KEY" \
+  -H "Content-Type: application/json"
+```
+
+### Example Response
+
+```json
+{
+  "success": true,
+  "total_requests": 15,
+  "requests": [
+    {
+      "task_id": "task_123456789",
+      "end_point": "https://api.example.com/process",
+      "goal": "Analyze customer feedback sentiment",
+      "status": "completed",
+      "created_at": "2024-01-15T10:30:00Z",
+      "completed_at": "2024-01-15T10:32:15Z",
+      "result": "Positive sentiment detected"
+    },
+    {
+      "task_id": "task_987654321",
+      "end_point": "https://api.example.com/analyze",
+      "goal": "Process document data",
+      "status": "running",
+      "created_at": "2024-01-15T11:00:00Z",
+      "progress": 75
+    }
+  ]
+}
+```
+
+### Error Responses
+
+**401 Unauthorized**
+```json
+{
+  "error": "Invalid API key"
+}
+```
+
+**500 Internal Server Error**
+```json
+{
+  "error": "Failed to retrieve inference requests"
+}
+```

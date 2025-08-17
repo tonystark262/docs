@@ -1,4 +1,73 @@
 ---
-title: 'Get Plants'
-openapi: 'GET /plants'
+title: 'Start Inference Task'
+openapi: 'POST /api/v1/inference/'
 ---
+
+## Start a New Inference Task
+
+This endpoint allows you to start a new inference task with specified parameters and goals.
+
+### Request Headers
+
+| Header | Type | Required | Description |
+|--------|------|----------|-------------|
+| `x-api-key` | string | Yes | Your API key for authentication |
+
+### Request Body
+
+| Field | Type | Required | Description |
+|-------|------|----------|-------------|
+| `end_point` | string | Yes | The endpoint or service to call for inference |
+| `goal` | string | Yes | The goal or objective for this inference task |
+| `params` | object | No | Additional parameters for the inference task |
+
+### Example Request
+
+```bash
+curl -X POST /api/v1/inference/ \
+  -H "x-api-key: YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "end_point": "https://api.example.com/process",
+    "goal": "Analyze customer feedback sentiment",
+    "params": {
+      "model": "gpt-4",
+      "temperature": 0.7,
+      "max_tokens": 1000
+    }
+  }'
+```
+
+### Example Response
+
+```json
+{
+  "success": true,
+  "task_id": "task_987654321",
+  "status": "started",
+  "message": "Inference task started successfully"
+}
+```
+
+### Error Responses
+
+**400 Bad Request**
+```json
+{
+  "error": "Missing required fields: end_point, goal"
+}
+```
+
+**401 Unauthorized**
+```json
+{
+  "error": "Invalid API key"
+}
+```
+
+**500 Internal Server Error**
+```json
+{
+  "error": "Failed to start inference task"
+}
+```
