@@ -31,6 +31,12 @@
             "pages": [
               "docs/editing/editing"
             ]
+          },
+          {
+            "group": "Running the workflow",
+            "pages": [
+              "docs/running/running"
+            ]
           }
         ]
       },

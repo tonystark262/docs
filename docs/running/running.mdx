@@ -1,0 +1,49 @@
+---
+title: Running a Workflow
+description: To run a workflow in **Optexity**, you need to call the inference API with the correct endpoint, parameters, and your API key.
+---
+
+
+## API Endpoint
+
+```http
+POST https://prod-api.optexity.com/api/v1/inference/call
+```
+
+## Headers
+```
+Content-Type: application/json
+x-api-key: <YOUR_API_KEY>
+```
+
+## Example Request
+
+```json
+{
+  "end_point": "ecw_telephone_encounter",
+  "params": {
+    "facility_name": "test",
+    "provider_name": "test",
+    "message_content": "sample msg",
+    "patient_full_name": "test",
+    "encounter_datetime": "03/18/2026 08:00 PM",
+    "reason_for_encounter": "test reason sample"
+  }
+}
+```
+
+## Notes
+
+- `end_point` specifies the workflow to run.
+- `params` contains all the inputs required for that workflow.
+- Replace `<YOUR_API_KEY>` with the API key provided to you.
+- Each workflow may have different parameters; check your recorded workflow for the correct parameters.
+
+## Example curl request
+
+```bash
+curl -X POST https://prod-api.optexity.com/api/v1/inference/call \
+-H "Content-Type: application/json" \
+-H "x-api-key: <YOUR_API_KEY>" \
+-d '{"end_point": "ecw_telephone_encounter", "params": {"facility_name": "test", "provider_name": "test", "message_content": "sample msg", "patient_full_name": "test", "encounter_datetime": "03/18/2026 08:00 PM", "reason_for_encounter": "test reason sample"}}'
+```
